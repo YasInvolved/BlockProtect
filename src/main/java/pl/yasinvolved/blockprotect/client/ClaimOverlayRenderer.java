@@ -41,9 +41,9 @@ public class ClaimOverlayRenderer {
             double minX = claim.min().getX();
             double minY = claim.min().getY();
             double minZ = claim.min().getZ();
-            double maxX = claim.max().getX();
-            double maxY = claim.max().getY();
-            double maxZ = claim.max().getZ();
+            double maxX = claim.max().getX() + 1.0d;
+            double maxY = claim.max().getY() + 1.0d;
+            double maxZ = claim.max().getZ() + 1.0d;
 
             AABB claimAABB = new AABB(minX, minY, minZ, maxX, maxY, maxZ);
             if (!frustum.isVisible(claimAABB)) {
