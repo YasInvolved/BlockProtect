@@ -165,7 +165,6 @@ tasks.named('shadowJar', com.github.jengelman.gradle.plugins.shadow.tasks.Shadow
     configurations = [project.configurations.shadowImplementation]
 
     relocate 'com.j256.ormlite', 'pl.yasinvolved.blockprotect.shadow.ormlite'
-    relocate 'org.sqlite', 'pl.yasinvolved.blockprotect.shadow.sqlite'
 
     archiveClassifier.set('')
 }
