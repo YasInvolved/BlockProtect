@@ -1,18 +1,16 @@
 package pl.yasinvolved.blockprotect;
 
+import com.j256.ormlite.logger.Level;
 import com.mojang.logging.LogUtils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.neoforged.fml.loading.FMLLoader;
 import net.neoforged.fml.loading.FMLPaths;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
-import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.neoforged.neoforge.event.server.ServerStoppingEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -47,6 +45,7 @@ public class Blockprotect {
     // FML will recognize some parameter types like IEventBus or ModContainer and pass them in automatically.
     public Blockprotect(IEventBus modEventBus, ModContainer modContainer) {
         // Register the commonSetup method for modloading
+        com.j256.ormlite.logger.Logger.setGlobalLogLevel(Level.WARNING);
         ITEMS.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
