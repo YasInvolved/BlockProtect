@@ -22,7 +22,6 @@ public class ProtectionEventListener {
             String dimension = player.level().dimension().location().toString();
             Optional<ClaimEntity> claim = ClaimManager.getClaimAt(dimension, event.getPos());
             if (claim.isPresent()) {
-                System.out.println("Claim present");
                 LogEntity log = new LogEntity(
                         claim.get(),
                         player.getUUID().toString(),

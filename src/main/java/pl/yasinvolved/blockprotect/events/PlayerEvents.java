@@ -71,7 +71,7 @@ public class PlayerEvents {
                         player.sendSystemMessage(Component.literal(
                                 String.format("§7[%s] §f%s §7- §a%s §7(%s)",
                                         timeStr,
-                                        log.getPlayerId().substring(0, 8) + "...",
+                                        log.getPlayerName(),
                                         log.getAction(),
                                         log.getBlockState()
                                 )
