@@ -48,7 +48,9 @@ public class ProtectCommands {
     private static LiteralArgumentBuilder<CommandSourceStack> buildDeleteCommand() {
         return Commands.literal("delete")
                 .then(Commands.argument("name", StringArgumentType.word())
-                    .executes(ProtectCommands::handleDelete));
+                    .suggests(ClaimSuggestions.PLAYER_CLAIMS)
+                    .executes(ProtectCommands::handleDelete)
+                );
     }
 
     private static LiteralArgumentBuilder<CommandSourceStack> buildInspectCommand() {

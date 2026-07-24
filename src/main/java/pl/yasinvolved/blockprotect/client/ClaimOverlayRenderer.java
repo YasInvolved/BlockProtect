@@ -35,6 +35,10 @@ public class ClaimOverlayRenderer {
         poseStack.pushPose();
         poseStack.translate(-cameraPos.x, -cameraPos.y, -cameraPos.z);
 
+        long time = mc.level.getGameTime();
+        float pulse_r = (float)(Math.sin(time * 0.1f)) + 0.3f;
+        float pulse_b = (float)(Math.sin(time * 0.1f)) + 0.3f;
+
         VertexConsumer buffer = mc.renderBuffers().bufferSource().getBuffer(RenderType.lines());
 
         for (ClientClaimData claim : ClientClaimCache.getActiveClaims()) {
@@ -55,7 +59,7 @@ public class ClaimOverlayRenderer {
                     buffer,
                     minX, minY, minZ,
                     maxX, maxY, maxZ,
-                    0.0f, 1.0f, 0.0f, 1.0f
+                    pulse_r, 0.0f, pulse_b, 1.0f
             );
         }
 

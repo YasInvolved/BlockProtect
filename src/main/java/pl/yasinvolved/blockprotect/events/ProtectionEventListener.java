@@ -25,7 +25,7 @@ public class ProtectionEventListener {
                 LogEntity log = new LogEntity(
                         claim.get(),
                         player.getUUID().toString(),
-                        player.getName().toString(),
+                        player.getName().getString(),
                         "BLOCK_BREAK",
                         dimension,
                         event.getPos().getX(),

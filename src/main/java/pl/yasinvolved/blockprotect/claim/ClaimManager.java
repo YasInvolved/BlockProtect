@@ -64,6 +64,18 @@ public class ClaimManager {
         CLAIMS.remove(claimId);
     }
 
+    public static List<ClaimEntity> getClaimsOfPlayer(String ownerId) {
+        List<ClaimEntity> claims = new ArrayList<>();
+
+        for (ClaimEntity claim : CLAIMS.values()) {
+            if (claim.getOwnerId().equals(ownerId)) {
+                claims.add(claim);
+            }
+        }
+
+        return claims;
+    }
+
     public static Optional<ClaimEntity> getClaimByName(UUID ownerId, String name) {
         for (ClaimEntity claim : CLAIMS.values()) {
             if (claim.getOwnerId().equals(ownerId.toString()) && claim.getName().equals(name)) {
