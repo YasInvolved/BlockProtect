@@ -21,7 +21,6 @@ public class ProtectionEventListener {
         if (event.getPlayer() instanceof ServerPlayer player) {
             String dimension = player.level().dimension().location().toString();
             Optional<ClaimEntity> claim = ClaimManager.getClaimAt(dimension, event.getPos());
-            System.out.println("Block broken");
             if (claim.isPresent()) {
                 System.out.println("Claim present");
                 LogEntity log = new LogEntity(
