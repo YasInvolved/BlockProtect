@@ -3,15 +3,34 @@ plugins {
     id 'maven-publish'
     id 'idea'
     id 'net.neoforged.moddev' version '2.0.142'
-    id 'com.palantir.git-version' version '3.1.0'
 }
 
-def git_details = versionDetails()
-if (git_details.isCleanTag) {
-    version = git_details.lastTag
-} else {
-    version = "${git_details.lastTag}-SNAPSHOT"
+def getGitVersion = {
+    def ciRef = System.getenv("GITHUB_REF_NAME")
+    if (ciRef != null && !ciRef.isEmpty()) {
+        return ciRef
+    }
+
+    try {
+        def stdout = new ByteArrayOutputStream()
+        exec = {
+            commandLine 'git', 'describe', '--tags', '--always', '--dirty=-SNAPSHOT'
+            standardOutput = stdout
+            ignoreExitValue = true
+        }
+        def result = stdout.toString().trim()
+        return result.isEmpty() ? "0.1.0-SNAPSHOT" : result
+    } catch (Exception e) {
+        return "0.1.0-SNAPSHOT"
+    }
 }
+
+def raw_version = getGitVersion()
+if (raw_version.startsWith("v")) {
+    raw_version = raw_version.substring(1)
+}
+
+version = raw_version
 group = mod_group_id
 
 repositories {
