@@ -3,9 +3,15 @@ plugins {
     id 'maven-publish'
     id 'idea'
     id 'net.neoforged.moddev' version '2.0.142'
+    id 'com.palantir.git-version' version '3.1.0'
 }
 
-version = mod_version
+def git_details = versionDetails()
+if (git_details.isCleanTag) {
+    version = git_details.lastTag
+} else {
+    version = "${git_details.lastTag}-SNAPSHOT"
+}
 group = mod_group_id
 
 repositories {
