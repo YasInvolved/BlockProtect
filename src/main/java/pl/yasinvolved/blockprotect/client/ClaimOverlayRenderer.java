@@ -47,11 +47,9 @@ public class ClaimOverlayRenderer {
 
             AABB claimAABB = new AABB(minX, minY, minZ, maxX, maxY, maxZ);
             if (!frustum.isVisible(claimAABB)) {
-                System.out.println("Frustum culled");
                 continue;
             }
 
-            System.out.println("Rendering box");
             LevelRenderer.renderLineBox(
                     poseStack,
                     buffer,

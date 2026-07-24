@@ -1,8 +1,10 @@
 package pl.yasinvolved.blockprotect.claim;
 
+import com.mojang.logging.LogUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.neoforge.network.PacketDistributor;
+import org.slf4j.Logger;
 import pl.yasinvolved.blockprotect.client.ClientClaimData;
 import pl.yasinvolved.blockprotect.networking.S2CSyncClaimsPacket;
 import pl.yasinvolved.blockprotect.storage.entities.ClaimEntity;
@@ -12,6 +14,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class ClaimManager {
     private static final Map<String, ClaimEntity> CLAIMS = new ConcurrentHashMap<>();
+    private static final Logger LOGGER = LogUtils.getLogger();
 
     public static List<ClaimEntity> getActiveClaims(String dimension) {
         List<ClaimEntity> active = new ArrayList<>();
@@ -61,17 +64,6 @@ public class ClaimManager {
         CLAIMS.remove(claimId);
     }
 
-    public static List<ClaimEntity> getClaimsByOwner(String ownerId) {
-        List<ClaimEntity> ownerClaims = new ArrayList<>();
-        for (ClaimEntity claim : CLAIMS.values()) {
-            if (claim.getOwnerId().equals(ownerId)) {
-                ownerClaims.add(claim);
-            }
-        }
-
-        return ownerClaims;
-    }
-
     public static Optional<ClaimEntity> getClaimByName(UUID ownerId, String name) {
         for (ClaimEntity claim : CLAIMS.values()) {
             if (claim.getOwnerId().equals(ownerId.toString()) && claim.getName().equals(name)) {
@@ -88,6 +80,6 @@ public class ClaimManager {
             CLAIMS.put(claim.getId(), claim);
         }
 
-        System.out.println("[BlockProtect] Loaded " + CLAIMS.size() + " protected regions!");
+        LOGGER.info("Loaded " + CLAIMS.size() + " protected regions!");
     }
 }

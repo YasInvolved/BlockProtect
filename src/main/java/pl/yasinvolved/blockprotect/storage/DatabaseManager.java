@@ -81,8 +81,8 @@ public class DatabaseManager implements AutoCloseable {
     public List<LogEntity> queryLogsAt(String dimension, int x, int y, int z, int limit) {
         try {
             return logDao.queryBuilder()
+                    .orderBy("timestamp", false)
                     .where()
-                    .eq("dimension", dimension).and()
                     .eq("x", x).and()
                     .eq("y", y).and()
                     .eq("z", z)

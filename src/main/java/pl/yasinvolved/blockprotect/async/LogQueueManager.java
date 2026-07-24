@@ -40,11 +40,9 @@ public class LogQueueManager {
         LogEntity log;
         while ((log = queue.poll()) != null) {
             batch.add(log);
-            LOGGER.info("Added new entry to log database.");
         }
 
         if (!batch.isEmpty()) {
-            System.out.println("Flushing a batch of " + batch.size() + " to the database.");
             databaseManager.insertLogBatch(batch);
         }
     }
