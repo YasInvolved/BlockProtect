@@ -7,8 +7,8 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.level.BlockEvent;
 import pl.yasinvolved.blockprotect.Blockprotect;
 import pl.yasinvolved.blockprotect.claim.ClaimManager;
-import pl.yasinvolved.blockprotect.storage.entities.ClaimEntity;
-import pl.yasinvolved.blockprotect.storage.entities.LogEntity;
+import pl.yasinvolved.blockprotect.storage.dbentities.ClaimEntity;
+import pl.yasinvolved.blockprotect.storage.dbentities.LogEntity;
 
 import java.util.Optional;
 

@@ -1,4 +1,4 @@
-package pl.yasinvolved.blockprotect.storage.entities;
+package pl.yasinvolved.blockprotect.storage.dbentities;
 
 import com.j256.ormlite.dao.ForeignCollection;
 import com.j256.ormlite.field.DatabaseField;
@@ -7,7 +7,6 @@ import com.j256.ormlite.table.DatabaseTable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
-import net.minecraft.world.phys.Vec3;
 import pl.yasinvolved.blockprotect.selection.PlayerSelection;
 
 import java.util.UUID;

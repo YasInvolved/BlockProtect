@@ -4,7 +4,7 @@ import com.mojang.brigadier.suggestion.SuggestionProvider;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.SharedSuggestionProvider;
 import pl.yasinvolved.blockprotect.claim.ClaimManager;
-import pl.yasinvolved.blockprotect.storage.entities.ClaimEntity;
+import pl.yasinvolved.blockprotect.storage.dbentities.ClaimEntity;
 
 import java.util.ArrayList;
 

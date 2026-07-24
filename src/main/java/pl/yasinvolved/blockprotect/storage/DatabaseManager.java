@@ -5,8 +5,8 @@ import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
-import pl.yasinvolved.blockprotect.storage.entities.ClaimEntity;
-import pl.yasinvolved.blockprotect.storage.entities.LogEntity;
+import pl.yasinvolved.blockprotect.storage.dbentities.ClaimEntity;
+import pl.yasinvolved.blockprotect.storage.dbentities.LogEntity;
 
 import java.io.File;
 import java.nio.file.Path;

@@ -17,9 +17,8 @@ import pl.yasinvolved.blockprotect.claim.ClaimManager;
 import pl.yasinvolved.blockprotect.networking.S2CInspectModePacket;
 import pl.yasinvolved.blockprotect.selection.PlayerSelection;
 import pl.yasinvolved.blockprotect.selection.SelectionManager;
-import pl.yasinvolved.blockprotect.storage.entities.ClaimEntity;
+import pl.yasinvolved.blockprotect.storage.dbentities.ClaimEntity;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 

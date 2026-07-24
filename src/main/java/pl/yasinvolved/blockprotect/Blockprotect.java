@@ -21,7 +21,7 @@ import pl.yasinvolved.blockprotect.claim.ClaimManager;
 import pl.yasinvolved.blockprotect.commands.ProtectCommands;
 import pl.yasinvolved.blockprotect.items.WandItem;
 import pl.yasinvolved.blockprotect.storage.DatabaseManager;
-import pl.yasinvolved.blockprotect.storage.entities.ClaimEntity;
+import pl.yasinvolved.blockprotect.storage.dbentities.ClaimEntity;
 
 import java.nio.file.Path;
 import java.util.List;

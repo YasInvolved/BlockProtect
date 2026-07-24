@@ -1,4 +1,4 @@
-package pl.yasinvolved.blockprotect.storage.entities;
+package pl.yasinvolved.blockprotect.storage.dbentities;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;

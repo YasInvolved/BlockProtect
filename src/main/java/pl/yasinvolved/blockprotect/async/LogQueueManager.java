@@ -3,7 +3,7 @@ package pl.yasinvolved.blockprotect.async;
 import com.mojang.logging.LogUtils;
 import org.slf4j.Logger;
 import pl.yasinvolved.blockprotect.storage.DatabaseManager;
-import pl.yasinvolved.blockprotect.storage.entities.LogEntity;
+import pl.yasinvolved.blockprotect.storage.dbentities.LogEntity;
 
 import java.util.ArrayList;
 import java.util.List;

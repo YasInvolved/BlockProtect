@@ -11,7 +11,7 @@ import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import pl.yasinvolved.blockprotect.Blockprotect;
 import pl.yasinvolved.blockprotect.async.InspectorManager;
-import pl.yasinvolved.blockprotect.storage.entities.LogEntity;
+import pl.yasinvolved.blockprotect.storage.dbentities.LogEntity;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

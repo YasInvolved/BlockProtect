@@ -7,7 +7,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import org.slf4j.Logger;
 import pl.yasinvolved.blockprotect.client.ClientClaimData;
 import pl.yasinvolved.blockprotect.networking.S2CSyncClaimsPacket;
-import pl.yasinvolved.blockprotect.storage.entities.ClaimEntity;
+import pl.yasinvolved.blockprotect.storage.dbentities.ClaimEntity;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;

@@ -1,7 +1,5 @@
 package pl.yasinvolved.blockprotect.client;
 
-import pl.yasinvolved.blockprotect.storage.entities.ClaimEntity;
-
 import java.util.Collections;
 import java.util.List;
 
