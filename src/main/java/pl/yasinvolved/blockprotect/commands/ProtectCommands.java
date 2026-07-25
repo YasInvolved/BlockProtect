@@ -30,6 +30,7 @@ public class ProtectCommands {
                     .then(buildCreateCommand())
                     .then(buildDeleteCommand())
                     .then(buildInspectCommand())
+                    .then(buildAddCoOwnerCommand())
         );
     }
 
@@ -55,6 +56,17 @@ public class ProtectCommands {
     private static LiteralArgumentBuilder<CommandSourceStack> buildInspectCommand() {
         return Commands.literal("inspect")
                 .executes(ProtectCommands::handleInspect);
+    }
+
+    private static LiteralArgumentBuilder<CommandSourceStack> buildAddCoOwnerCommand() {
+        return Commands.literal("coowner")
+                .then(Commands.argument("claim", StringArgumentType.word())
+                        .suggests(ClaimSuggestions.PLAYER_CLAIMS)
+                        .then(Commands.argument("player", StringArgumentType.word())
+                                .suggests(ClaimSuggestions.ALL_PLAYERS)
+                                .executes(ProtectCommands::handleAddCoOwner)
+                        )
+                );
     }
 
     private static int handleWand(CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
@@ -122,6 +134,39 @@ public class ProtectCommands {
         } else {
             player.sendSystemMessage(Component.literal("§c[BlockProtect] Inspector mode DISABLED."));
         }
+
+        return 1;
+    }
+
+    private static int handleAddCoOwner(CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
+        String claimName = StringArgumentType.getString(ctx, "claim");
+        String coOwnerName = StringArgumentType.getString(ctx, "player");
+
+        CommandSourceStack source = ctx.getSource();
+        ServerPlayer invoker = source.getPlayerOrException();
+
+        var claim = ClaimManager.getClaimByName(invoker.getUUID(), claimName);
+        if (claim.isEmpty())
+        {
+            invoker.sendSystemMessage(Component.literal(
+                    String.format("§c[BlockProtect] Claim %s doesn't exist.", claimName)
+            ));
+            return 0;
+        }
+
+        ServerPlayer coOwner = source.getServer().getPlayerList().getPlayerByName(coOwnerName);
+        if (coOwner == null)
+        {
+            invoker.sendSystemMessage(Component.literal(
+                    String.format("§c[BlockProtect] Player %s is not currently active.", coOwnerName)
+            ));
+            return 0;
+        }
+
+        claim.get().addCoOwner(coOwner.getUUID());
+        invoker.sendSystemMessage(Component.literal(
+                String.format("§a[BlockProtect] Successfully added %s to %s as a co-owner.", coOwnerName, claimName)
+        ));
 
         return 1;
     }
