@@ -21,12 +21,14 @@ import pl.yasinvolved.blockprotect.storage.dbentities.ClaimEntity;
 
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class ProtectCommands {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(
             Commands.literal("bp")
                     .then(buildWandCommand())
+                    .then(buildInfoCommand())
                     .then(buildCreateCommand())
                     .then(buildDeleteCommand())
                     .then(buildInspectCommand())
@@ -37,6 +39,13 @@ public class ProtectCommands {
     private static LiteralArgumentBuilder<CommandSourceStack> buildWandCommand() {
         return Commands.literal("wand")
                 .executes(ProtectCommands::handleWand);
+    }
+
+    private static LiteralArgumentBuilder<CommandSourceStack> buildInfoCommand() {
+        return Commands.literal("info")
+                .then(Commands.argument("name", StringArgumentType.word())
+                        .executes(ProtectCommands::handleInfo)
+                );
     }
 
     private static LiteralArgumentBuilder<CommandSourceStack> buildCreateCommand() {
@@ -73,6 +82,39 @@ public class ProtectCommands {
         ServerPlayer player = ctx.getSource().getPlayerOrException();
         player.getInventory().add(new ItemStack(Blockprotect.PROTECT_WAND));
         player.sendSystemMessage(Component.literal("§aGiven 1x Protect Wand."));
+        return 1;
+    }
+
+    private static int handleInfo(CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
+        CommandSourceStack source = ctx.getSource();
+        ServerPlayer player = source.getPlayerOrException();
+        String claimName = StringArgumentType.getString(ctx, "name");
+
+        var claim = ClaimManager.getClaimByName(player.getUUID(), claimName);
+        if (claim.isEmpty())
+        {
+            source.sendSystemMessage(Component.literal(
+                    String.format("§c[BlockProtect] Claim %s not found.")
+            ));
+            return 0;
+        }
+
+        String ownerName = source.getPlayer().getScoreboardName();
+        source.sendSystemMessage(Component.literal("§6--- Claim Info ---"));
+        source.sendSystemMessage(Component.literal("ID: " + claim.get().getId()));
+        source.sendSystemMessage(Component.literal("Name: " + claimName));
+        source.sendSystemMessage(Component.literal("Owner ID: " + claim.get().getOwnerId()));
+        source.sendSystemMessage(Component.literal("Owner Name: " + ownerName));
+        source.sendSystemMessage(Component.literal("Dimension: " + claim.get().getDimension()));
+
+        String coOwnersList = claim.get().getCoOwners().stream()
+                .map(uuid -> {
+                    ServerPlayer p = source.getServer().getPlayerList().getPlayer(uuid);
+                    return p != null ? player.getScoreboardName() : uuid.toString();
+                })
+                .collect(Collectors.joining(", "));
+        source.sendSystemMessage(Component.literal("Co-owners: " + coOwnersList));
+
         return 1;
     }
 
