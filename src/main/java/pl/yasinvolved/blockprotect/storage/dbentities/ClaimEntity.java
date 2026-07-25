@@ -116,6 +116,14 @@ public class ClaimEntity {
     public int getMaxY() { return maxY; }
     public int getMaxZ() { return maxZ; }
 
+    public List<UUID> getCoOwners() {
+        if (coOwners == null) {
+            coOwners = unpackUUIDs(coOwnersBlob);
+        }
+
+        return coOwners;
+    }
+
     public void addCoOwner(UUID coOwnerId) {
         coOwners.add(coOwnerId);
         syncBlobs();
@@ -134,9 +142,5 @@ public class ClaimEntity {
 
     public boolean contains(String dimension, BlockPos pos) {
         return getBox().isInside(pos);
-    }
-
-    public boolean isOwnerOrTrusted(String uuid) {
-        return false;
     }
 }
